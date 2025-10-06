@@ -1,2 +1,7 @@
 automl_implementation_plan.txt
 venv/
+data/__pycache__/
+data/cifar-10-batches-py/
+data/cifar-10-python.tar.gz
+models/__pycache__/
+training/__pycache__/

@@ -56,7 +56,6 @@ def train_model(model, train_loader, test_loader, epochs=2,
                 test_correct += predicted.eq(labels).sum().item()
         
         test_acc = 100. * test_correct / test_total
-        print(f'Epoch {epoch+1}: Test Accuracy = {test_acc:.2f}%')
         
         if test_acc > best_acc:
             best_acc = test_acc
@@ -96,7 +95,7 @@ if __name__ == '__main__':
     # Train
     best_acc = train_model(
         model, train_loader, test_loader,
-        epochs=5, lr=0.001, device=device
+        epochs=20, lr=0.001, device=device
     )
     
     print(f'\nBaseline Best Accuracy: {best_acc:.2f}%')
