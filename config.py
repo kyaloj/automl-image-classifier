@@ -29,9 +29,10 @@ SEARCH_SPACE = {
 }
 
 # Training settings
-NUM_EPOCHS = 15
+NUM_EPOCHS = 10
 MAX_TRIALS = 10
 TIMEOUT = None  # No timeout - complete all trials
+NUM_CLASSES = 10
 
 # Device settings
 USE_MPS = True  # Use Apple Silicon GPU if available

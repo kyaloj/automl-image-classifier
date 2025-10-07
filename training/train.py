@@ -4,19 +4,44 @@ import torch.optim as optim
 from tqdm import tqdm
 import time
 
-def train_model(model, train_loader, test_loader, epochs=2, 
-                lr=0.001, device='cuda'):
-    """Train a model and return best accuracy"""
+def train_model(model, train_loader, test_loader, epochs=10, 
+                lr=0.001, device='mps', optimizer_name='Adam', weight_decay=0.0):
+    """
+    Train a model and return best accuracy
+    
+    Args:
+        model: PyTorch model
+        train_loader: Training data loader
+        test_loader: Test data loader
+        epochs: Number of epochs to train
+        lr: Learning rate
+        device: Device to train on ('cuda', 'mps', or 'cpu')
+        optimizer_name: Optimizer to use ('Adam', 'SGD', or 'AdamW')
+        weight_decay: Weight decay for regularization
+    
+    Returns:
+        best_acc: Best test accuracy achieved
+    """
     
     model = model.to(device)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=lr)
+    
+    # Create optimizer based on name
+    if optimizer_name == 'Adam':
+        optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
+    elif optimizer_name == 'SGD':
+        optimizer = optim.SGD(model.parameters(), lr=lr, weight_decay=weight_decay, momentum=0.9)
+    elif optimizer_name == 'AdamW':
+        optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
+    else:
+        raise ValueError(f"Unknown optimizer: {optimizer_name}")
     
     best_acc = 0.0
     
     for epoch in range(epochs):
+        epoch_start_time = time.time()
+        
         # Training phase
-        epoch_start_time = time.time()  # Track time
         model.train()
         train_loss = 0.0
         train_correct = 0
@@ -56,46 +81,19 @@ def train_model(model, train_loader, test_loader, epochs=2,
                 test_correct += predicted.eq(labels).sum().item()
         
         test_acc = 100. * test_correct / test_total
-        
-        if test_acc > best_acc:
-            best_acc = test_acc
-            torch.save(model.state_dict(), 'saved_models/baseline_best.pth')
-
         epoch_time = time.time() - epoch_start_time
+        
         print(f'Epoch {epoch+1}: Test Accuracy = {test_acc:.2f}% | Time: {epoch_time:.1f}s')
         
+        # Save best model
+        if test_acc > best_acc:
+            best_acc = test_acc
+            
+        
         # Estimate remaining time
-        remaining_epochs = epochs - (epoch + 1)
-        estimated_time = remaining_epochs * epoch_time / 60
-        print(f'Estimated time remaining: {estimated_time:.1f} minutes')
+        if epoch < epochs - 1:
+            remaining_epochs = epochs - (epoch + 1)
+            estimated_time = remaining_epochs * epoch_time / 60
+            print(f'  Estimated time remaining: {estimated_time:.1f} minutes')
     
     return best_acc
-
-if __name__ == '__main__':
-    from data.dataset import get_cifar10_loaders
-    from models.cnn import SimpleCNN
-    
-    # Setup
-    # Better device detection for Mac
-    if torch.cuda.is_available():
-        device = 'cuda'
-    elif torch.backends.mps.is_available():
-        device = 'mps'  # Apple Silicon GPU
-    else:
-        device = 'cpu'
-
-    print(f'Using device: {device}')
-    
-    # Load data
-    train_loader, test_loader = get_cifar10_loaders(batch_size=128)
-    
-    # Create model
-    model = SimpleCNN(num_classes=10, dropout=0.5)
-    
-    # Train
-    best_acc = train_model(
-        model, train_loader, test_loader,
-        epochs=20, lr=0.001, device=device
-    )
-    
-    print(f'\nBaseline Best Accuracy: {best_acc:.2f}%')
