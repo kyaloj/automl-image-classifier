@@ -1,0 +1,54 @@
+{
+  "best_trial": 7,
+  "best_accuracy": 80.3,
+  "best_params": {
+    "learning_rate": 0.012273800987852962,
+    "batch_size": 128,
+    "optimizer": "SGD",
+    "weight_decay": 2.7155819552829413e-05,
+    "dropout": 0.06952143571507782
+  },
+  "n_trials": 10,
+  "timestamp": "2025-10-06T20:53:34.890979",
+  "config": {
+    "num_epochs": 15,
+    "max_trials": 10,
+    "search_space": {
+      "learning_rate": {
+        "type": "float",
+        "low": 1e-05,
+        "high": 0.1,
+        "log": true
+      },
+      "batch_size": {
+        "type": "categorical",
+        "choices": [
+          32,
+          64,
+          128,
+          256
+        ]
+      },
+      "optimizer": {
+        "type": "categorical",
+        "choices": [
+          "Adam",
+          "SGD",
+          "AdamW"
+        ]
+      },
+      "weight_decay": {
+        "type": "float",
+        "low": 1e-06,
+        "high": 0.01,
+        "log": true
+      },
+      "dropout": {
+        "type": "float",
+        "low": 0.0,
+        "high": 0.6,
+        "log": false
+      }
+    }
+  }
+}
