@@ -36,3 +36,8 @@ NUM_CLASSES = 10
 
 # Device settings
 USE_MPS = True  # Use Apple Silicon GPU if available
+
+CLASSES = [
+    'airplane', 'automobile', 'bird', 'cat', 'deer',
+    'dog', 'frog', 'horse', 'ship', 'truck'
+]

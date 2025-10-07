@@ -6,3 +6,5 @@ data/cifar-10-python.tar.gz
 models/__pycache__/
 training/__pycache__/
 __pycache__/
+.DS_Store
+data/.DS_Store
