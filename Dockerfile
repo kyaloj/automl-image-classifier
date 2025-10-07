@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Security config
+RUN useradd --create-home appuser
+USER appuser
+
 # Copy application code
 COPY . .
 
@@ -18,7 +22,7 @@ COPY . .
 RUN mkdir -p saved_models results
 
 # Expose port
-EXPOSE 7860
+EXPOSE 8000
 
 # Run the application
 CMD ["python", "api/main.py"]
