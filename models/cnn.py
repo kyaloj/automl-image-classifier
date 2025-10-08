@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class SimpleCNN(nn.Module):
-    """Simple CNN for CIFAR-10 baseline"""
+    """Simple CNN for CIFAR-10"""
     
     def __init__(self, num_classes=10, dropout=0.5):
         super(SimpleCNN, self).__init__()
