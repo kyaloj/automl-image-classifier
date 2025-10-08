@@ -1,18 +1,18 @@
 {
-  "best_trial": 7,
-  "best_accuracy": 80.3,
+  "best_trial": 0,
+  "best_accuracy": 82.88,
   "best_params": {
-    "learning_rate": 0.012273800987852962,
-    "batch_size": 128,
-    "optimizer": "SGD",
-    "weight_decay": 2.7155819552829413e-05,
-    "dropout": 0.06952143571507782
+    "learning_rate": 0.00031489116479568613,
+    "batch_size": 32,
+    "optimizer": "AdamW",
+    "weight_decay": 0.00025378155082656634,
+    "dropout": 0.4248435466776273
   },
-  "n_trials": 10,
-  "timestamp": "2025-10-06T20:53:34.890979",
+  "n_trials": 30,
+  "timestamp": "2025-10-08T01:30:02.903921",
   "config": {
-    "num_epochs": 15,
-    "max_trials": 10,
+    "num_epochs": 30,
+    "max_trials": 30,
     "search_space": {
       "learning_rate": {
         "type": "float",

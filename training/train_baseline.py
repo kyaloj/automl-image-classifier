@@ -33,7 +33,7 @@ if __name__ == '__main__':
     print('\nStarting baseline training...')
     best_acc = train_model(
         model, train_loader, test_loader,
-        epochs=15, lr=0.001, device=device,
+        epochs=config.NUM_EPOCHS, lr=0.001, device=device,
         optimizer_name='Adam', weight_decay=0.0
     )
     

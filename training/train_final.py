@@ -71,7 +71,7 @@ def train_final_model():
         model=model,
         train_loader=train_loader,
         test_loader=test_loader,
-        epochs=config.NUM_EPOCHS,
+        epochs=config.FINAL_TRAINING_EPOCHS,
         lr=lr,
         device=device,
         optimizer_name=optimizer_name,
@@ -95,6 +95,7 @@ def train_final_model():
         'optimization_accuracy': results['best_accuracy'],
         'training_epochs': config.NUM_EPOCHS,
         'optimization_epochs': config.NUM_EPOCHS,
+        'final_training_epochs': config.FINAL_TRAINING_EPOCHS,
         'num_classes': config.NUM_CLASSES,
         'timestamp': results['timestamp']
     }, save_path)

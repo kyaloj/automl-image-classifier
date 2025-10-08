@@ -64,7 +64,8 @@ def objective(trial):
     if optimizer_name == 'Adam':
         optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     elif optimizer_name == 'SGD':
-        optimizer = optim.SGD(model.parameters(), lr=lr, weight_decay=weight_decay, momentum=0.9)
+        momentum = trial.suggest_float('momentum', 0.8, 0.99) 
+        optimizer = optim.SGD(model.parameters(), lr=lr, weight_decay=weight_decay, momentum=momentum)
     else:  # AdamW
         optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     
