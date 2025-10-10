@@ -79,7 +79,8 @@ This demonstrates that AutoML isn't magic - it's a valuable tool that finds good
 
 ## CONTACT DETAILS
 
-**Author:** Justus Mbaluka 
+**Author:** Justus K Mbaluka
+
 **Project:** ML Engineering Portfolio - AutoML Image Classifier  
 **Institution:** Imperial College London: Fundamental AI and ML Programme.
 
