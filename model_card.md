@@ -66,8 +66,6 @@ Input: 32×32×3 RGB image
 
 ## Performance
 
-Give a summary graph or metrics of how the model performs. Remember to include how you are measuring the performance and what data you analysed it on. 
-
 Using a simple formulae of Total Correct Prediction (True Positives and True Negatives) / Total Predictions, we determine the model performance.
 
 ```
